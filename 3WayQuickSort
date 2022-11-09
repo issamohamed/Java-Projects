@@ -1,0 +1,32 @@
+// Work of Issa Mohamed and Brandon Szeto
+public class Sort3Way {
+
+	public static <T extends Comparable<T>> void quickSort3Way(T[] a, int lo, int hi) {
+		if ((hi <= lo))
+			return;
+
+		T p = a[lo];
+		int i = lo + 1; // see hint 1
+		int j = lo;
+
+		int k = hi;
+
+		while ( i <= k ) { // see hint 2
+			int c = a[i].compareTo(p);
+			if (c < 0)
+			ArrayUtils.swap(a,j++, i++);// see hint 3
+			else if (c > 0)
+			ArrayUtils.swap(a, i, k--) ; // see hint 3
+			else
+				i++; // see hint 3
+		}
+
+		quickSort3Way(a,lo,j - 1); // see hint 4
+		quickSort3Way(a, k + 1, hi); // see hint 4
+	}
+
+	public static <T extends Comparable<T>> void quickSort3Way(T[] a) {
+		RandomUtils.shuffle(a);
+		quickSort3Way(a, 0, a.length-1);
+	}
+}
